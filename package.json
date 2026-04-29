@@ -1,6 +1,6 @@
 {
   "name": "meadow-connection-mongodb",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Meadow MongoDB Connection Plugin",
   "main": "source/Meadow-Connection-MongoDB.js",
   "scripts": {
