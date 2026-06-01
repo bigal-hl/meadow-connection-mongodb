@@ -4,9 +4,7 @@
 
 MongoDB connection service for the Meadow data access layer.
 
-[![Build Status](https://github.com/fable-retold/meadow-connection-mongodb/workflows/Tests/badge.svg)](https://github.com/fable-retold/meadow-connection-mongodb/actions)
-[![npm version](https://badge.fury.io/js/meadow-connection-mongodb.svg)](https://www.npmjs.com/package/meadow-connection-mongodb)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[meadow-connection-mongodb on npm](https://www.npmjs.com/package/meadow-connection-mongodb) | [MIT License](LICENSE)
 
 ## Features
 
