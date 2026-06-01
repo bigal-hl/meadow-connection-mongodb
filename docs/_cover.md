@@ -2,7 +2,7 @@
 
 > MongoDB connection service for the Meadow data access layer
 
-- **Fable Service Provider** -- seamless dependency injection integration
+- **Fable Service Provider** -- smooth dependency injection integration
 - **Connection Pooling** -- built-in pool management via the official MongoDB driver
 - **Collection & Index Management** -- automatic creation from Meadow schemas
 - **Authentication Support** -- optional credential-based connection URIs
