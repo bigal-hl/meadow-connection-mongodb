@@ -4,7 +4,6 @@
 
 MongoDB connection service for the Meadow data access layer.
 
-[![Coverage Status](https://coveralls.io/repos/github/stevenvelozo/meadow-connection-mongodb/badge.svg?branch=main)](https://coveralls.io/github/stevenvelozo/meadow-connection-mongodb?branch=main)
 [![Build Status](https://github.com/fable-retold/meadow-connection-mongodb/workflows/Tests/badge.svg)](https://github.com/fable-retold/meadow-connection-mongodb/actions)
 [![npm version](https://badge.fury.io/js/meadow-connection-mongodb.svg)](https://www.npmjs.com/package/meadow-connection-mongodb)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
