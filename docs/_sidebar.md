@@ -21,13 +21,13 @@
     - [generateDropTableStatement()](api/generateDropTableStatement.md)
 
 - **Ecosystem**
-  - [Meadow](https://github.com/fable-retold/meadow)
-  - [FoxHound](https://github.com/fable-retold/foxhound)
-  - [Stricture](https://github.com/fable-retold/stricture)
-  - [Fable](https://github.com/fable-retold/fable)
+  - [Meadow](https://fable-retold.github.io/meadow/)
+  - [FoxHound](https://fable-retold.github.io/foxhound/)
+  - [Stricture](https://fable-retold.github.io/stricture/)
+  - [Fable](https://fable-retold.github.io/fable/)
   - Connectors
-    - [MySQL](https://github.com/fable-retold/meadow-connection-mysql)
-    - [MSSQL](https://github.com/fable-retold/meadow-connection-mssql)
-    - [SQLite](https://github.com/fable-retold/meadow-connection-sqlite)
-    - [RocksDB](https://github.com/fable-retold/meadow-connection-rocksdb)
-    - [Dgraph](https://github.com/fable-retold/meadow-connection-dgraph)
+    - [MySQL](https://fable-retold.github.io/meadow-connection-mysql/)
+    - [MSSQL](https://fable-retold.github.io/meadow-connection-mssql/)
+    - [SQLite](https://fable-retold.github.io/meadow-connection-sqlite/)
+    - [RocksDB](https://fable-retold.github.io/meadow-connection-rocksdb/)
+    - [Dgraph](https://fable-retold.github.io/meadow-connection-dgraph/)
