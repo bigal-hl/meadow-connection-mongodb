@@ -1,0 +1,20 @@
+graph TB
+	subgraph Application Layer
+		APP[Application Code]
+		MEA[Meadow ORM]
+		FH[FoxHound MongoDB Dialect]
+	end
+	subgraph Connection Layer
+		MCP["meadow-connection-mongodb<br/>(MeadowConnectionMongoDB)"]
+		MC[MongoClient]
+		DB[Db Instance]
+	end
+	subgraph MongoDB Server
+		MONGO[(MongoDB)]
+	end
+	APP --> MEA
+	MEA --> FH
+	FH --> MCP
+	MCP --> MC
+	MC --> DB
+	DB --> MONGO

@@ -1,0 +1,12 @@
+flowchart TD
+	A[createTable called] --> B[generateCreateTableStatement]
+	B --> C{Connected?}
+	C -->|No| ERR[Callback with error]
+	C -->|Yes| D[db.createCollection]
+	D --> E{Collection exists?}
+	E -->|Created| F{Has indexes?}
+	E -->|Error code 48| G[Log warning]
+	G --> F
+	F -->|Yes| H[collection.createIndexes]
+	F -->|No| I[Callback success]
+	H --> I

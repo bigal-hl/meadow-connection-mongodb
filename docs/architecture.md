@@ -4,64 +4,13 @@
 
 The MongoDB connector bridges Meadow's data access abstraction with the official MongoDB Node.js driver. It follows the Fable service provider pattern, providing connection management, collection creation, and index generation.
 
-```mermaid
-graph TB
-	subgraph Application Layer
-		APP[Application Code]
-		MEA[Meadow ORM]
-		FH[FoxHound MongoDB Dialect]
-	end
-	subgraph Connection Layer
-		MCP["meadow-connection-mongodb<br/>(MeadowConnectionMongoDB)"]
-		MC[MongoClient]
-		DB[Db Instance]
-	end
-	subgraph MongoDB Server
-		MONGO[(MongoDB)]
-	end
-	APP --> MEA
-	MEA --> FH
-	FH --> MCP
-	MCP --> MC
-	MC --> DB
-	DB --> MONGO
-```
+<!-- bespoke diagram: edit diagrams/system-overview.mmd or .hints.json, then: npx pict-renderer-graph build modules/meadow/meadow-connection-mongodb/docs -->
+![System Overview](diagrams/system-overview.svg)
 
 ## Connection Lifecycle
 
-```mermaid
-sequenceDiagram
-	participant App as Application
-	participant Fable as Fable
-	participant MCP as MeadowConnectionMongoDB
-	participant MC as MongoClient
-	participant Mongo as MongoDB Server
-
-	App->>Fable: new libFable(settings)
-	App->>Fable: addAndInstantiateServiceType()
-	Fable->>MCP: constructor(fable, options)
-	MCP->>MCP: Read MongoDB config
-	MCP->>MCP: Normalize property names
-	Note over MCP: Server->host, Port->port, etc.
-
-	alt Auto-Connect Enabled
-		MCP->>MCP: connect()
-	end
-
-	App->>MCP: connectAsync(callback)
-
-	alt Already Connected
-		MCP-->>App: callback(null, database)
-	else Not Connected
-		MCP->>MCP: _buildConnectionURI()
-		MCP->>MC: new MongoClient(uri, options)
-		MC->>Mongo: Establish Connection Pool
-		MCP->>MC: client.db(database)
-		MC-->>MCP: Db instance
-		MCP->>MCP: connected = true
-		MCP-->>App: callback(null, database)
-	end
-```
+<!-- bespoke diagram: edit diagrams/connection-lifecycle.mmd or .hints.json, then: npx pict-renderer-graph build modules/meadow/meadow-connection-mongodb/docs -->
+![Connection Lifecycle](diagrams/connection-lifecycle.svg)
 
 ## Service Provider Model
 
@@ -95,58 +44,20 @@ classDiagram
 
 ## Settings Flow
 
-```mermaid
-flowchart LR
-	subgraph Input Sources
-		OPT[Constructor Options]
-		SET[fable.settings.MongoDB]
-	end
-	subgraph Normalization
-		NORM["Property Mapping<br/>Server -> host<br/>Port -> port<br/>User -> user<br/>Password -> password<br/>Database -> database<br/>ConnectionPoolLimit -> maxPoolSize"]
-	end
-	subgraph Output
-		URI["Connection URI<br/>mongodb://[user:pass@]host:port/db"]
-		POOL["Pool Config<br/>{ maxPoolSize: N }"]
-	end
-	OPT --> NORM
-	SET --> NORM
-	NORM --> URI
-	NORM --> POOL
-```
+<!-- bespoke diagram: edit diagrams/settings-flow.mmd or .hints.json, then: npx pict-renderer-graph build modules/meadow/meadow-connection-mongodb/docs -->
+![Settings Flow](diagrams/settings-flow.svg)
 
 ## Collection Creation Flow
 
-```mermaid
-flowchart TD
-	A[createTable called] --> B[generateCreateTableStatement]
-	B --> C{Connected?}
-	C -->|No| ERR[Callback with error]
-	C -->|Yes| D[db.createCollection]
-	D --> E{Collection exists?}
-	E -->|Created| F{Has indexes?}
-	E -->|Error code 48| G[Log warning]
-	G --> F
-	F -->|Yes| H[collection.createIndexes]
-	F -->|No| I[Callback success]
-	H --> I
-```
+<!-- bespoke diagram: edit diagrams/collection-creation-flow.mmd or .hints.json, then: npx pict-renderer-graph build modules/meadow/meadow-connection-mongodb/docs -->
+![Collection Creation Flow](diagrams/collection-creation-flow.svg)
 
 ## Connection Safety
 
 The connector includes several safety mechanisms:
 
-```mermaid
-flowchart TD
-	A[connect called] --> B{Already connected?}
-	B -->|Yes| C[Log error with masked password]
-	C --> D[Return without action]
-	B -->|No| E{mongodb driver available?}
-	E -->|No| F[Log error]
-	E -->|Yes| G[Build URI]
-	G --> H[Create MongoClient]
-	H --> I[Get Db instance]
-	I --> J[Set connected = true]
-```
+<!-- bespoke diagram: edit diagrams/connection-safety.mmd or .hints.json, then: npx pict-renderer-graph build modules/meadow/meadow-connection-mongodb/docs -->
+![Connection Safety](diagrams/connection-safety.svg)
 
 Key safety features:
 

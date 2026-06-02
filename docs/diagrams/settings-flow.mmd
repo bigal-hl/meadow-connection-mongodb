@@ -1,0 +1,16 @@
+flowchart LR
+	subgraph Input Sources
+		OPT[Constructor Options]
+		SET[fable.settings.MongoDB]
+	end
+	subgraph Normalization
+		NORM["Property Mapping<br/>Server -> host<br/>Port -> port<br/>User -> user<br/>Password -> password<br/>Database -> database<br/>ConnectionPoolLimit -> maxPoolSize"]
+	end
+	subgraph Output
+		URI["Connection URI<br/>mongodb://[user:pass@]host:port/db"]
+		POOL["Pool Config<br/>{ maxPoolSize: N }"]
+	end
+	OPT --> NORM
+	SET --> NORM
+	NORM --> URI
+	NORM --> POOL

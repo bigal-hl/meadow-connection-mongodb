@@ -1,0 +1,31 @@
+sequenceDiagram
+	participant App as Application
+	participant Fable as Fable
+	participant MCP as MeadowConnectionMongoDB
+	participant MC as MongoClient
+	participant Mongo as MongoDB Server
+
+	App->>Fable: new libFable(settings)
+	App->>Fable: addAndInstantiateServiceType()
+	Fable->>MCP: constructor(fable, options)
+	MCP->>MCP: Read MongoDB config
+	MCP->>MCP: Normalize property names
+	Note over MCP: Server->host, Port->port, etc.
+
+	alt Auto-Connect Enabled
+		MCP->>MCP: connect()
+	end
+
+	App->>MCP: connectAsync(callback)
+
+	alt Already Connected
+		MCP-->>App: callback(null, database)
+	else Not Connected
+		MCP->>MCP: _buildConnectionURI()
+		MCP->>MC: new MongoClient(uri, options)
+		MC->>Mongo: Establish Connection Pool
+		MCP->>MC: client.db(database)
+		MC-->>MCP: Db instance
+		MCP->>MCP: connected = true
+		MCP-->>App: callback(null, database)
+	end

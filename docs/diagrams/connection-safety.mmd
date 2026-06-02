@@ -1,0 +1,10 @@
+flowchart TD
+	A[connect called] --> B{Already connected?}
+	B -->|Yes| C[Log error with masked password]
+	C --> D[Return without action]
+	B -->|No| E{mongodb driver available?}
+	E -->|No| F[Log error]
+	E -->|Yes| G[Build URI]
+	G --> H[Create MongoClient]
+	H --> I[Get Db instance]
+	I --> J[Set connected = true]
